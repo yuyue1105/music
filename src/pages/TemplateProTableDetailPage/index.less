@@ -1,0 +1,126 @@
+.spin{
+  max-height: 100% !important;
+}
+.fitWidth{
+  width: 100%;
+}
+.valueTypeOption > div{
+  justify-content: flex-start !important;
+}
+.root{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #f2f2f2;
+  .returnGlobal{
+    float: left;
+    position: relative;
+    width: 100%;
+    height: 39px;
+    border-bottom: 1px solid #E5E8EF;
+    background: #ffffff;
+    .returnContent{
+      margin: 0 auto;
+      max-width: 1440px;
+      height: 40px;
+      .return{
+        float: left;
+        position: relative;
+        cursor: pointer;
+        .returnIcon{
+          float: left;
+          position: relative;
+          margin-top: 13px;
+          width: 16px;
+          height: 16px;
+        }
+        .returnText{
+          float: left;
+          position: relative;
+          margin-left: 2px;
+          height: 40px;
+          line-height: 40px;
+          font-weight: 500px;
+          font-size: 17px;
+        }
+      }
+    }
+  }
+  .layout{
+    position: absolute;
+    top:124px;
+    bottom: 86px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1440px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .content{
+      width: 100%;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      .title{
+        width: 100%;
+        height: 22px;
+        margin-bottom: 20px;
+        .titleIcon{
+          float: left;
+          position: relative;
+          margin-top: 5px;
+        }
+        .titleText{
+          float: left;
+          position: relative;
+          margin-left: 8px;
+        }
+      }
+      .formContent{
+        display: flex;
+        flex-flow: row wrap;
+      }
+      .formContentBasic{
+        margin-left: -40px; 
+        margin-right: -40px;
+      }
+    }
+    .content:last-child{
+      margin-bottom: 0px;
+    }
+  }
+  .layoutLook{
+    bottom: 20px;
+  }
+  .buttonGlobal{
+    position: absolute;
+    height: 66px;
+    background: #ffffff;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    box-shadow: 0 -4px 8px #0000000d;
+    .buttonContent{
+      margin: 0 auto;
+      max-width: 1440px;
+      height: 66px;
+      .button{
+        float: right;
+        position: relative;
+        margin-top: 17px;
+        .cancel{
+          float: left;
+          position: relative;
+        }
+        .submit{
+          float: left;
+          position: relative;
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+.spin{
+  max-height: 100% !important;
+}
+.fitWidth{
+  width: 100%;
+}
+.valueTypeOption > div{
+  justify-content: flex-start !important;
+}
+.root{
+  position: relative;
+  width: 848px;
+  height: 100vh;
+  background: #ffffff; 
+  .titleGlobal{
+    float: left;
+    position: relative;
+    width: 100%;
+    height: 53px;
+    border-bottom: 1px solid #EEEFF1;
+    .titleText{
+      float: left;
+      margin-left: 24px;
+      height: 54px;
+      line-height: 54px;
+      font-weight: 500px;
+      font-size: 17px;
+    }
+    .titleIcon{
+      float: right;
+      margin-right: 17px;
+      margin-top: 17px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
+  .layout{
+    position: absolute;
+    top:54px;
+    bottom: 66px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 848px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .content{
+      width: 100%;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 20px;
+      box-sizing: border-box;
+      .title{
+        width: 100%;
+        height: 22px;
+        margin-bottom: 20px;
+        .titleIcon{
+          float: left;
+          position: relative;
+          margin-top: 5px;
+        }
+        .titleText{
+          float: left;
+          position: relative;
+          margin-left: 8px;
+        }
+      }
+      .formContent{
+        display: flex;
+        flex-flow: row wrap;
+      }
+      .formContentBasic{
+        margin-left: -10px; 
+        margin-right: -10px;
+      }
+    }
+  }
+  .layoutLook{
+    bottom: 20px;
+  }
+  .buttonGlobal{
+    position: absolute;
+    height: 66px;
+    background: #ffffff;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    .button{
+      float: right;
+      position: relative;
+      margin-top: 17px;
+      margin-right: 20px;
+      .cancel{
+        float: left;
+        position: relative;
+      }
+      .submit{
+        float: left;
+        position: relative;
+        margin-left: 8px;
+      }
+    }
+  }
+}

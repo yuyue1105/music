@@ -1,0 +1,66 @@
+.tag {
+  display: flex;
+  gap: 12px;
+  height: 32px;
+  margin-top:20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  .leftOpration {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+  .content {
+    display: flex;
+    flex: 1;
+    gap: 12px;
+    overflow: hidden;
+    .tagWrapper {
+      display: flex;
+      padding: 0 12px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 32px;
+      cursor: pointer;
+      .tagName{
+        white-space: nowrap;
+      }
+      .tagIcon{
+        margin-left: 6px;
+      }
+    }
+    .tagActive {
+      color: #2490ff;
+    }
+  }
+  .rightOpration {
+    position: relative;
+    display: flex;
+    background-color: #fff;
+    .opration {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+    }
+  }
+}
+.view{
+  margin-top: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.moreRow {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  width: 154px;
+  gap: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
