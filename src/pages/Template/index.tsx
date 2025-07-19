@@ -8,6 +8,7 @@ import { useModel } from '@umijs/max';
 import TemplateComponentPrivate from './components/TemplateComponentPrivate';
 import TemplateComponentCommon from '@/components/TemplateComponentCommon';
 import styles from './index.less';
+import audio1 from "@/assets/audio/LBI利比 - 跳楼机.mp3"
 
 export default () => {
   const {
@@ -81,11 +82,20 @@ export default () => {
         <div className={styles.left}>
           <div className={styles.name}></div>
           <div className={styles.line}></div>
-          <div className={styles.list}>推荐</div>
-          <div className={styles.list}>喜欢</div>
-          <div className={styles.list}>收藏</div>
+          <div className={styles.list}>
+            <div className = {styles.text}>推荐</div>
+          </div>
+          <div className={styles.list}>
+            <div className = {styles.text}>喜欢</div>
+          </div>
+          <div className={styles.list}>
+            <div className = {styles.text}>收藏</div>
+          </div>
         </div>
         <div className={styles.right}>
+          <audio controls className = {styles.audio}>
+            <source src={audio1}></source>
+          </audio>
         </div>
     </div>
   );
