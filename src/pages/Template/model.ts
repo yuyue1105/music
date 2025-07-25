@@ -19,9 +19,7 @@ export default () => {
     test:1,
   });
   const [musicIndex, setMusicIndex] = useState<any>(1);
-  const [currentSong, setCurrentSong] = useState<any>({
-    songName:'done',
-  });
+  const [currentSong, setCurrentSong] = useState<any>();
   const [currentSonger, setCurrentSonger] = useState<any>({
     songerName:'done',
   });

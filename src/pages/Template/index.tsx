@@ -8,7 +8,8 @@ import { useModel } from '@umijs/max';
 import TemplateComponentPrivate from './components/TemplateComponentPrivate';
 import TemplateComponentCommon from '@/components/TemplateComponentCommon';
 import styles from './index.less';
-import music from '@/utils/music'
+import music from '@/utils/music';
+
 
 export default () => {
   const {
@@ -31,58 +32,35 @@ export default () => {
 
   } = useModel('Template.model');
 
-  const onClickGet = useCallback(async () => {
-    try {
-      const response = await templateGetApi({...serviceParamsGet});
-      if (response?.code === 200) {
-        message.success('操作成功');
-      } else {
-        message.error(response.msg || '操作失败');
-      }
-    } catch (error) {
-      message.error('系统异常');
-    }
-  },[serviceParamsGet]);
 
-  const onClickPost =  useCallback(async () => {
-    try {
-      const response = await templatePostApi({ ...serviceParamsPost });
-      if (response?.code === 200) {
-        message.success('操作成功');
-      } else {
-        message.error(response.msg || '操作失败');
-      }
-    } catch (error) {
-      message.error('系统异常');
-    }
-  },[serviceParamsPost]);
 
-  const onClickPut = useCallback(async () => {
-    try {
-      const response = await templatePutApi({...serviceParamsPut});
-      if (response?.code === 200) {
-        message.success('操作成功');
-      } else {
-        message.error(response.msg || '操作失败');
-      }
-    } catch (error) {
-      message.error('系统异常');
-    }
-  },[serviceParamsPut]);
-
-  const onClickDelete = useCallback(async () => {
-    try {
-      const response =await templateDeleteApi({...serviceParamsDelete});
-      if (response?.code === 200) {
-        message.success('操作成功');
-      } else {
-        message.error(response.msg || '操作失败');
-      }
-    } catch (error) {
-      message.error('系统异常');
-    }
+  const onClickDo = useCallback(async (item) => {
+    console.log('33333333333333333',item)
+    setCurrentSong(item)
   },[serviceParamsDelete]);
 
+  const forCirlce = useCallback(() => {
+    let returnValue:any=[];
+    for (let index = 0; index < music.length; index++) {
+      returnValue.push(
+        <div className={styles.list}>
+          <div className = {styles.textLeft} onClick={()=>onClickDo(music[index])}>
+            {music[index].split('-')[0 ]}
+          </div>
+        </div>
+      )
+    }
+    return returnValue        
+  },[]);
+
+  
+  const renderMusic = useCallback(() => {
+    console.log('fffffffffffff',currentSong,`./music/${currentSong}`)
+    const audioPath = require(`./music/${currentSong}`).default;
+    return           <audio controls className = {styles.audio}>
+            <source src={audioPath}></source>
+          </audio>        
+  },[currentSong]);
 
   return (
     <div className={styles.global}>
@@ -91,24 +69,14 @@ export default () => {
             <div className={styles.nameTop}></div>
             <div className={styles.name}><strong>列表</strong></div>
             <div className={styles.line}></div>
-            <div className={styles.list}>
-              <div className = {styles.textLeft}>推荐</div>
-            </div>
-            <div className={styles.list}>
-              <div className = {styles.textLeft}>喜欢</div>
-            </div>
-            <div className={styles.list}>
-              <div className = {styles.textLeft}>收藏</div>
-            </div>
+            <div className={styles.musicOut}>{forCirlce()}</div>
           </div>
           <div className={styles.dock2}></div>
         </div>
         
         <div className={styles.right}>
-          {/* {music[musicIndex]}
-          <audio controls className = {styles.audio}>
-            <source src={`./music/${music[musicIndex]}`}></source>
-          </audio> */}
+          {renderMusic()}
+
           <div className={styles.outLine}>
             <div className={styles.textRightName}>
               <strong>播放器</strong>
