@@ -1,48 +1,240 @@
 .global{ 
+  background: url('/image/screen.png');
   display: flex; 
-  .left{
-    background-color: rgb(214, 214, 214);
-    width: 200px;
-    height: 100vh;
-    .name{
-      background-color: rgb(255, 143, 143);
-      height: 40px;
-      width: 100%;
-    }
-    .line{
-      margin-left:10%;
-      margin-top:5px;
-      width: 80%;
-      height: 1px;
-      background-color: rgb(156, 156, 156)
-    }
-    .list{
-      margin-left: 15px;
-      margin-right: 20px;
-      font-size: 26px;
-      width: 170px;
-      height: 40px;
-      cursor: pointer;
-      .text{
-        float: left;
-        margin-left: 10px;
-        width: 160px;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  .leftOut{
+    .left{
+      margin-top: 20px;
+      margin-left: 10px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+      background-color: rgb(214, 214, 214);
+      width: 280px;
+      height: calc(100vh - 110px);
+      border-radius:25px ;
+      opacity: 0.5;
+      .nameTop{
+        height:10px ;
       }
+      .name{
+        height: 40px;
+        width: 100%;
+        margin-left:20px ;
+        margin-top: 20px;
+        font-size: 30px;
+        border-top-left-radius:25px ;
+        border-top-right-radius:25px ;
+      }
+      .line{
+        margin-left:10%;
+        margin-top:5px;
+        width: 80%;
+        height: 1px;
+        background-color: rgb(156, 156, 156)
+      }
+      .list{
+        margin-left: 15px;
+        margin-right: 20px;
+        margin-top:7px ;
+        font-size: 26px;
+        width: 250px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+        opacity: 1;
+        .textLeft{
+          float: left;
+          margin-left: 10px;
+          width: 140px;
+          font-family:Arial;
+        }
+      }
+      .list:hover{
+        background-color: rgb(196, 196, 196);
+        border-radius: 10px;
+        height: 40px;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+        opacity: 1;
+      }
+      
     }
-    .list:hover{
-      background-color: rgb(196, 196, 196);
-      border-radius: 10px;
-      height: 40px;
+    .left:hover{
+      opacity: 0.6;
     }
-    
+    .dock2{
+      height:80px ;
+      width: 240px;
+      margin-left:30px ;
+      background-color: rgb(125, 125, 125);
+      border-radius: 50px;
+      opacity: 0.8;
+      margin-top: -10px;
+      box-shadow: 5px 5px 5px rgba(0.1, 0.1, 0.1, 0.4);
+    }
+  }
+  
+  .clean{
+    height:60px ;
+    width: 100px;
+    background-color: rgb(125, 125, 125);
+    border-radius: 50px;
+    opacity: 0.8;
+    box-shadow: 5px 5px 5px rgba(0.1, 0.1, 0.1, 0.4);
   }
   .right{
-    background-color: gray;
-    width: calc(100vw - 200px);
+    width: calc(100vw - 400px);
     height: 100vh;
-    .audio{
-      width: 1000px;
+    .outLine{
+      width: calc(100vw - 340px);
+      height:calc(100vh - 110px);
+      margin-top: 20px;
+      margin-left:20px ;
+      border-radius: 25px;
+      background-color: rgb(227, 227, 227);
+      backdrop-filter: blur(10px);
+      opacity: 0.5;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      .textRightName{
+        float: left;
+        width: calc(100vw - 340px);
+        height: 50px;
+        margin-top: 30px;
+        margin-left: 20px;
+        font-family:Arial;
+        font-size: 30px;
+      }
     }
+    .dock{
+      float: left;
+      overflow: auto;
+      height:80px ;
+      width: calc(100vw - 500px);
+      margin-left:20px ;
+      background-color: rgb(125, 125, 125);
+      border-radius: 50px;
+      opacity: 0.8;
+      margin-top: -10px;
+      margin-left: 100px;
+      box-shadow: 5px 5px 5px rgba(0.1, 0.1, 0.1, 0.4);
+      .forOverflow{
+        margin-top: 10px;
+        float: left;
+        width:1060px ;
+      }
+      .nowTime{
+        display: inline-block;
+        margin-left: 60px;
+        float: left;
+        height: 50px;
+        width: 120px;
+        background-color: aliceblue;
+        border-radius: 25px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .nowTime:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+      .random{
+        float: left;
+        display: inline-block;
+        margin-left: 60px;
+        height: 50px;
+        width: 50px;
+        background-color: aliceblue;
+        border-radius: 25px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .random:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+      .last{
+        float: left;
+        display: inline-block;
+        margin-left: 50px;
+        height: 50px;
+        width: 50px;
+        background-color: aliceblue;
+        border-radius: 25px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .last:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+      .stopAndStart{
+        float: left;
+        display: inline-block;
+        margin-left: 50px;
+        margin-top: -10px;
+        height: 70px;
+        width: 70px;
+        background-color: rgb(0, 128, 240);
+        border-radius: 35px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .stopAndStart:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+      .next{
+        float: left;
+        display: inline-block;
+        margin-left: 50px;
+        height: 50px;
+        width: 50px;
+        background-color: aliceblue;
+        border-radius: 25px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .next:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+      .restart{
+        float: left;
+        display: inline-block;
+        margin-left: 50px;
+        height: 50px;
+        width: 50px;
+        background-color: aliceblue;
+        border-radius: 25px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .restart:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+      .volume{
+        float: left;
+        display: inline-block;
+        margin-left: 50px;
+        height: 50px;
+        width:300px;
+        background-color: aliceblue;
+        border-radius: 25px;
+        font-size: 29px;
+        font-family:Arial;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .voliume:hover{
+        box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
+      }
+    }
+    .dock:hover{
+      opacity: 0.9;
+      box-shadow: 5px 5px 5px rgba(0.1, 0.1, 0.1, 0.4);
+    }
+    .outLine:hover {
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      opacity: 0.6;
+    }
+    
   }
 }

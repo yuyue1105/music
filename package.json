@@ -8,7 +8,7 @@
     "postinstall": "max setup",
     "prepare": "husky install",
     "setup": "max setup",
-    "start": "npm run dev"
+    "start": "node ./public/file-list-generator.js && npm run dev"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",

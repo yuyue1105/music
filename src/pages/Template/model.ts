@@ -18,6 +18,13 @@ export default () => {
   const [componentParamsPrivate, setComponentParamsPrivate] = useState<any>({
     test:1,
   });
+  const [musicIndex, setMusicIndex] = useState<any>(1);
+  const [currentSong, setCurrentSong] = useState<any>({
+    songName:'done',
+  });
+  const [currentSonger, setCurrentSonger] = useState<any>({
+    songerName:'done',
+  });
   return {
     serviceParamsGet,
     setServiceParamsGet,
@@ -28,6 +35,12 @@ export default () => {
     serviceParamsDelete,
     setServiceParamsDelete,
     componentParamsPrivate,
-    setComponentParamsPrivate
+    setComponentParamsPrivate,
+    musicIndex,
+    setMusicIndex,
+    currentSong,
+    setCurrentSong,
+    currentSonger,
+    setCurrentSonger
   };
 };
