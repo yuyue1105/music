@@ -23,6 +23,7 @@ export default () => {
   const [currentSonger, setCurrentSonger] = useState<any>({
     songerName:'done',
   });
+  const [isPlaying, setIsPlaying] = useState<any>(false);
   return {
     serviceParamsGet,
     setServiceParamsGet,
@@ -39,6 +40,8 @@ export default () => {
     currentSong,
     setCurrentSong,
     currentSonger,
-    setCurrentSonger
+    setCurrentSonger,
+    isPlaying,
+    setIsPlaying
   };
 };

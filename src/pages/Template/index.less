@@ -90,6 +90,10 @@
   .right{
     width: calc(100vw - 400px);
     height: 100vh;
+    .audio{
+      position: absolute;
+      z-index: -1;
+    }
     .outLine{
       width: calc(100vw - 340px);
       height:calc(100vh - 110px);
@@ -125,7 +129,7 @@
       .forOverflow{
         margin-top: 10px;
         float: left;
-        width:1060px ;
+        width:900px ;
       }
       .nowTime{
         display: inline-block;
@@ -229,6 +233,11 @@
         font-size: 29px;
         font-family:Arial;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+      .icon{
+        float: left;
+        height: 50px;
+        width: 50px;
       }
       .voliume:hover{
         box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);

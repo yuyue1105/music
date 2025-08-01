@@ -27,13 +27,16 @@ export default () => {
     currentSong,
     setCurrentSong,
     currentSonger,
-    setCurrentSonger
+    setCurrentSonger,
+    isPlaying,
+    setIsPlaying
 
   } = useModel('Template.model');
 
   const onClickDo = useCallback(async (item) => {
+    setIsPlaying(true)
     setCurrentSong(item)
-  },[serviceParamsDelete]);
+  },[setCurrentSong, setIsPlaying]);
 
   const forCirlce = useCallback(() => {
     let returnValue:any=[];
@@ -47,7 +50,29 @@ export default () => {
       )
     }
     return returnValue        
-  },[]);
+  },[onClickDo]);
+  const onClickStopAndStart = useCallback(() =>{
+    const audioPlayer:any = document.getElementById('audioPlayer');
+    if(isPlaying===true){
+      audioPlayer.pause();
+      setIsPlaying(false)
+    }else{
+      audioPlayer.play();
+      setIsPlaying(true)
+    }
+    console.log("333")
+    
+  },[isPlaying, setIsPlaying]);
+
+  const renderStopAndStart=useCallback(() =>{
+    if(isPlaying===true){
+      return <img onClick={()=>onClickStopAndStart()} className={styles.stopAndStart} src="./image/stop.png" alt="" />
+    }else{
+      return <img onClick={()=>onClickStopAndStart()} className={styles.stopAndStart} src="./image/start.png" alt="" />
+    }
+ 
+    
+  },[isPlaying, onClickStopAndStart]);
 
   return (
     <div className={styles.global}>
@@ -62,7 +87,7 @@ export default () => {
         </div>
         
         <div className={styles.right}>
-          <audio controls className = {styles.audio} key={currentSong} autoPlay>
+          <audio id="audioPlayer" controls className = {styles.audio} key={currentSong} autoPlay>
             <source src={`./music/${currentSong}`}></source>
           </audio> 
 
@@ -77,15 +102,17 @@ export default () => {
                 <div className={styles.nowDockBar}></div>
               </div>
               <div className={styles.nowTime}></div>
-              <div className={styles.random}></div>
-              <div className={styles.last}></div>
-              <div className={styles.stopAndStart}></div>
-              <div className={styles.next}></div>
-              <div className={styles.restart}></div>
-              <div className={styles.volume}></div>
+              <img className={styles.last} src="./image/last.png" alt="" />
+              {renderStopAndStart()}
+              
+              
+              <img className={styles.next} src="./image/next.png" alt="" />
+              <div className={styles.volume}>
+                <img className={styles.icon} src="./image/volume.png" alt="" />
+              </div>
             </div>
           </div>
         </div>
     </div>
-  );
+  )
 };
