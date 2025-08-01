@@ -10,7 +10,6 @@ import TemplateComponentCommon from '@/components/TemplateComponentCommon';
 import styles from './index.less';
 import music from '@/utils/music';
 
-
 export default () => {
   const {
     serviceParamsGet,
@@ -32,10 +31,7 @@ export default () => {
 
   } = useModel('Template.model');
 
-
-
   const onClickDo = useCallback(async (item) => {
-    console.log('33333333333333333',item)
     setCurrentSong(item)
   },[serviceParamsDelete]);
 
@@ -53,15 +49,6 @@ export default () => {
     return returnValue        
   },[]);
 
-  
-  const renderMusic = useCallback(() => {
-    console.log('fffffffffffff',currentSong,`./music/${currentSong}`)
-    const audioPath = require(`./music/${currentSong}`).default;
-    return           <audio controls className = {styles.audio}>
-            <source src={audioPath}></source>
-          </audio>        
-  },[currentSong]);
-
   return (
     <div className={styles.global}>
         <div className={styles.leftOut}>
@@ -75,7 +62,9 @@ export default () => {
         </div>
         
         <div className={styles.right}>
-          {renderMusic()}
+          <audio controls className = {styles.audio} key={currentSong} autoPlay>
+            <source src={`./music/${currentSong}`}></source>
+          </audio> 
 
           <div className={styles.outLine}>
             <div className={styles.textRightName}>
