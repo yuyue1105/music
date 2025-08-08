@@ -35,7 +35,10 @@
         float: left;
         overflow-y: auto;
         overflow-x: hidden;
-        height: calc(100vh - 176px);
+        height: calc(100vh - 205px);
+      }
+      .listSelect{
+        background-color: red !important;
       }
       .list{
         margin-left: 15px;
@@ -48,12 +51,29 @@
         border-radius: 10px;
         box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
         opacity: 1;
-        .textLeft{
+        .textLeftSmall{
+          font-size:25px ;
           float: left;
           margin-left: 10px;
           width: 250px;
           font-family:Arial;
         }
+        .textLeftBig{
+          font-size:18px ;
+          float: left;
+          margin-left: 10px;
+          width: 250px;
+          font-family:Arial;
+        }
+        .songerName{
+          font-size:0px ;
+          float: left;
+          margin-left: -10px;
+          text-align: right;
+          width: 250px;
+          font-family:Arial;
+        }
+        
       }
       .list:hover{
         background-color: rgb(196, 196, 196);
@@ -61,6 +81,14 @@
         height: 40px;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
         opacity: 1;
+        .songerName{
+          font-size:20px ;
+          text-align: right;
+          float: left;
+          margin-left: -10px;
+          width: 250px;
+          font-family:Arial;
+        }
       }
       
     }
@@ -113,6 +141,41 @@
         font-family:Arial;
         font-size: 30px;
       }
+      .songName{
+        float: left;
+        text-align: center;
+        width: calc(100vw - 350px);
+        font-family:Arial;
+        font-size: 50px;
+      }
+      .songerName{
+        float: left;
+        text-align: center;
+        width: calc(100vw - 350px);
+        font-family:Arial;
+        font-size: 30px;
+      }
+      .near1{
+        float: left;
+        text-align: left;
+        width: calc(100vw - 350px);
+        font-family:Arial;
+        font-size: 30px;
+        border-radius: 10px;
+        background-color: rgb(242, 255, 251);
+        opacity: 0.4;
+      }
+      .near2{
+        opacity: 0.4;
+        background-color: rgb(242, 255, 251);
+        float: left;
+        text-align: right;
+        width: calc(100vw - 350px);
+        font-family:Arial;
+        font-size: 30px;
+        margin-bottom:10px ;
+        border-radius: 10px;
+      }
     }
     .dock{
       float: left;
@@ -131,7 +194,7 @@
         float: left;
         width:900px ;
       }
-      .nowTime{
+      .picture{ 
         display: inline-block;
         margin-left: 60px;
         float: left;
@@ -142,8 +205,14 @@
         font-size: 29px;
         font-family:Arial;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+        .nowTime{
+          float: left;
+          width: 50px;
+          height: 50px;
+          margin: 0 auto;
+        }
       }
-      .nowTime:hover{
+      .picture:hover{
         box-shadow: 5px 5px 5px rgba(75, 108, 119, 0.862);
       }
       .random{
