@@ -3,7 +3,7 @@ import {
   ProSkeleton,
 } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
-import React, { useRef, useState ,useCallback} from 'react';
+import React, { useRef, useState ,useCallback, useEffect} from 'react';
 import { useModel } from '@umijs/max';
 import TemplateComponentPrivate from './components/TemplateComponentPrivate';
 import TemplateComponentCommon from '@/components/TemplateComponentCommon';
@@ -31,10 +31,31 @@ export default () => {
     nowTime,
     setNowTime,
     musicList,
-    setMusicList
+    setMusicList,
+    progressPercent,
+    setProgressPercent
 
   } = useModel('Template.model');
 
+
+  const updateProgress = useCallback((e) => {
+    const { duration, currentTime } = e.target;
+    
+    if (duration) {
+        const progressPercent = (currentTime / duration) * 100;
+        console.log(duration,currentTime,progressPercent)
+        setProgressPercent(progressPercent)
+        // progress.style.width = `${progressPercent}%`;
+        // currentTimeEl.textContent = formatTime(currentTime);
+    }
+    
+  },[setProgressPercent]);
+
+  // useEffect(()=>{
+  //   const audioPlayer:any = document.getElementById('audioPlayer');
+  //   console.log(audioPlayer)
+  //   audioPlayer.addEventListener('timeupdate', updateProgress);
+  // },[updateProgress])
   const onSearch = useCallback((value: string) => {
     let newMusicList:any=[]
     for(let index = 0; index < music?.length; index++){
@@ -184,7 +205,9 @@ export default () => {
         </div>
         
         <div className={styles.right}>
-          <audio id="audioPlayer" controls className = {styles.audio} key={currentSong} autoPlay>
+          <audio id="audioPlayer" controls className = {styles.audio} key={currentSong} autoPlay 
+            onTimeUpdate={(e)=>updateProgress(e)}
+          >
             <source src={`./music/${currentSong}`}></source>
           </audio> 
 
@@ -196,7 +219,15 @@ export default () => {
             
           </div>
           <div className={styles.dock}>
-            <div className={styles.jinDuTiao}><Progress percent={50} status="active" /></div>
+            <div className={styles.jinDuTiao}>
+              <div className={styles.progressContainer}>
+                <div className={styles.progressBar} id="progress-bar">
+                    <div className={styles.progress} id="progress" style={{width:progressPercent+'%'}}>
+                        <div className={styles.progressHandle} id="progress-handle"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
             <div className={styles.forOverflow}>
               <div className={styles.dockBar}>
                 <div className={styles.nowDockBar}></div>
