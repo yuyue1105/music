@@ -2,9 +2,9 @@
 import { DEFAULT_NAME } from '@/constants';
 import { useState } from 'react';
 import { NoToneMapping } from 'three';
-
+import music from '@/utils/music';
 export default () => {
-  const [musicIndex, setMusicIndex] = useState<any>(1);
+  const [musicIndex, setMusicIndex] = useState<any>(99999);
   const [currentSong, setCurrentSong] = useState<any>("暂无播放-暂无歌手.MP3");
   const [currentSonger, setCurrentSonger] = useState<any>({
     songerName:'done',
@@ -12,6 +12,7 @@ export default () => {
   const [isPlaying, setIsPlaying] = useState<any>(false);
   let [name, setName] = useState<any>();
   let [nowTime, setNowTime] = useState<any>('one');
+  let [musicList, setMusicList] = useState<any>(music);
   return {
     musicIndex,
     setMusicIndex,
@@ -24,6 +25,8 @@ export default () => {
     name,
     setName,
     nowTime,
-    setNowTime
+    setNowTime,
+    musicList,
+    setMusicList
   };
 };

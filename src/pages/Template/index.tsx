@@ -11,6 +11,10 @@ import styles from './index.less';
 import music from '@/utils/music';
 import { render } from '@react-three/fiber';
 import Item from 'antd/es/list/Item';
+import { Input, Space } from 'antd';
+import { Progress } from 'antd';
+
+const { Search } = Input;
 
 export default () => {
   const {
@@ -25,21 +29,47 @@ export default () => {
     name,
     setName,
     nowTime,
-    setNowTime
+    setNowTime,
+    musicList,
+    setMusicList
 
   } = useModel('Template.model');
+
+  const onSearch = useCallback((value: string) => {
+    let newMusicList:any=[]
+    for(let index = 0; index < music?.length; index++){
+      if(music[index].indexOf(value)!== -1){
+        newMusicList.push(music[index])
+      }
+    }
+    setMusicList([...newMusicList])
+    let hasIndex=false;
+    for(let index = 0; index < newMusicList?.length; index++){
+      console.log(newMusicList[index],currentSong,newMusicList[index].split('-')[0],newMusicList[index].split('-')[0] === currentSong)
+      if(newMusicList[index] === currentSong){
+        hasIndex=true
+        setMusicIndex(index)
+      }
+    }
+    if(hasIndex === false){
+      setMusicIndex(null)
+    }
+    
+  },[currentSong, setMusicIndex, setMusicList]);
+
+  const App: React.FC = () => ( <Progress percent={70} status="exception" />);
 /*选歌*/
   const onClickDo = useCallback((index:any) => {
     setIsPlaying(true)
-    setCurrentSong(music[index])
+    setCurrentSong(musicList[index])
     setMusicIndex(index)
-  },[setCurrentSong, setIsPlaying, setMusicIndex]);
+  },[musicList, setCurrentSong, setIsPlaying, setMusicIndex]);
 /*歌曲列表 */
   const forCirlce = useCallback(() => {
     let returnValue:any=[];
-    for (let index = 0; index < music.length; index++) {
-      let text = music[index].split('-')[0 ]
-      let name = music[index].split('-')[1 ]
+    for (let index = 0; index < musicList?.length; index++) {
+      let text = musicList[index].split('-')[0 ]
+      let name = musicList[index].split('-')[1 ]
       if(text.length > 8){
         returnValue.push(
           <div className={musicIndex===index?`${styles.list} ${styles.listSelect}`:styles.list}>
@@ -59,7 +89,7 @@ export default () => {
       }
     }
     return returnValue        
-  },[musicIndex, onClickDo]);
+  },[musicIndex, musicList, onClickDo]);
 //播放暂停键
   const onClickStopAndStart = useCallback(() =>{
     const audioPlayer:any = document.getElementById('audioPlayer');
@@ -77,11 +107,19 @@ export default () => {
   },[isPlaying, setIsPlaying, currentSong]);
 /*下一首 */
   const onClickNext = useCallback(() => {
-    onClickDo(musicIndex + 1)    
+    if(musicIndex + 1 < (music.length)){
+      onClickDo(musicIndex + 1)
+    }else{
+      onClickDo(0)
+    }    
   },[musicIndex, onClickDo]);
 //上一首
   const onClickLast = useCallback(() => {
-    onClickDo(musicIndex - 1)    
+    if(musicIndex - 1 >= (0)){
+      onClickDo(musicIndex - 1)    
+    }else{
+      onClickDo(music.length - 1)
+    }
   },[musicIndex, onClickDo]);
 /*换暂停开始图标*/
   const renderStopAndStart=useCallback(() =>{
@@ -95,19 +133,22 @@ export default () => {
   },[isPlaying, onClickStopAndStart]);
 /*歌曲名显示*/
   const renderSongName=useCallback(()=>{
-    let returnChoose:any = [];
-    let lastSong:any = music[musicIndex - 1];
-    let nextSong:any = music[musicIndex + 1];
-    returnChoose.push(
-      <div>
-        <div className={styles.near1}><strong>上一首：</strong>{lastSong}</div>
-        <div className={styles.near2}><strong>下一首：</strong>{nextSong}</div>
-        <div className={styles.songName}><strong>{currentSong.split('-')[0 ]}</strong></div>
-        <div className={styles.songerName}>{currentSong.split('-')[1].split('.')[0]}</div>
-      </div>
-    )
-    return returnChoose
-  },[musicIndex, currentSong])
+    if(musicList?.length>0){
+      let returnChoose:any = [];
+      let lastSong:any = musicList[musicIndex - 1];
+      let nextSong:any = musicList[musicIndex + 1];
+      returnChoose.push(
+        <div>
+          <div className={styles.near1}><strong>上一首：</strong>{lastSong}</div>
+          <div className={styles.near2}><strong>下一首：</strong>{nextSong}</div>
+          <div className={styles.songName}><strong>{currentSong.split('-')[0 ]}</strong></div>
+          <div className={styles.songerName}>{currentSong.split('-')[1].split('.')[0]}</div>
+        </div>
+      )
+      return returnChoose
+    }
+
+  },[musicList, musicIndex, currentSong])
 //播放顺序
   const renderNowTime=useCallback(()=>{
     if(nowTime==='rendem'){
@@ -132,7 +173,14 @@ export default () => {
             <div className={styles.line}></div>
             <div className={styles.musicOut}>{forCirlce()}</div>
           </div>
-          <div className={styles.dock2}></div>
+          <div className={styles.dock2}>
+            <Search 
+              className={styles.search111} 
+              placeholder="input search text" 
+              onSearch={onSearch} 
+              style={{ width: 200 ,marginTop: '24px',marginLeft: '20px'}} 
+            />
+          </div>
         </div>
         
         <div className={styles.right}>
@@ -145,8 +193,10 @@ export default () => {
               <strong>播放器</strong>
             </div>
             {renderSongName()}
+            
           </div>
           <div className={styles.dock}>
+            <div className={styles.jinDuTiao}><Progress percent={50} status="active" /></div>
             <div className={styles.forOverflow}>
               <div className={styles.dockBar}>
                 <div className={styles.nowDockBar}></div>
@@ -160,6 +210,7 @@ export default () => {
                 <img className={styles.icon} src="./image/volume.png" alt="" />
               </div>
             </div>
+            
           </div>
         </div>
     </div>
