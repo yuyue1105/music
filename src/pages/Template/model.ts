@@ -13,8 +13,10 @@ export default () => {
   let [name, setName] = useState<any>();
   let [nowTime, setNowTime] = useState<any>('one');
   let [musicList, setMusicList] = useState<any>(music);
-  let [progressPercent,setProgressPercent] = useState<any>(0);
-
+  let [progressPercent,setProgressPercent] = useState<any>(0.0);
+  let [audioPlayer,setAudioPlayer] = useState<any>(0);
+  let [volume,setVolume] = useState<any>(0);
+  let [duration,setDuration] = useState<any>(0);
   return {
     musicIndex,
     setMusicIndex,
@@ -31,6 +33,12 @@ export default () => {
     musicList,
     setMusicList,
     progressPercent,
-    setProgressPercent
-  };
+    setProgressPercent,
+    audioPlayer,
+    setAudioPlayer,
+    volume,
+    setVolume,
+    duration,
+    setDuration
+  }
 };

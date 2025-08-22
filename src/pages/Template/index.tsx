@@ -2,7 +2,7 @@ import { templatePostApi, templateGetApi, templateDeleteApi, templatePutApi} fro
 import {
   ProSkeleton,
 } from '@ant-design/pro-components';
-import { Button, message } from 'antd';
+import { Button, ConfigProvider, message } from 'antd';
 import React, { useRef, useState ,useCallback, useEffect} from 'react';
 import { useModel } from '@umijs/max';
 import TemplateComponentPrivate from './components/TemplateComponentPrivate';
@@ -13,8 +13,9 @@ import { render } from '@react-three/fiber';
 import Item from 'antd/es/list/Item';
 import { Input, Space } from 'antd';
 import { Progress } from 'antd';
+import { Slider, Switch } from 'antd';
 
-const { Search } = Input;
+
 
 export default () => {
   const {
@@ -33,29 +34,45 @@ export default () => {
     musicList,
     setMusicList,
     progressPercent,
-    setProgressPercent
+    setProgressPercent,
+    volume,
+    setVolume,
+    duration,
+    setDuration
+    
 
   } = useModel('Template.model');
 
-
+  //播放暂停键
+  const onClickStopAndStart = useCallback(() =>{
+    const audioPlayer:any = document.getElementById('audioPlayer');
+    if(currentSong==="暂无播放-暂无歌手.MP3"){
+      setIsPlaying(false)
+    }else{
+      if(isPlaying===true){
+        audioPlayer.pause();
+        setIsPlaying(false)
+      }else{
+        audioPlayer.play();
+        setIsPlaying(true)
+      }
+    }
+  },[isPlaying, setIsPlaying, currentSong]);
+  const { Search } = Input;
   const updateProgress = useCallback((e) => {
     const { duration, currentTime } = e.target;
     
     if (duration) {
         const progressPercent = (currentTime / duration) * 100;
-        console.log(duration,currentTime,progressPercent)
+        setDuration(duration)
         setProgressPercent(progressPercent)
-        // progress.style.width = `${progressPercent}%`;
-        // currentTimeEl.textContent = formatTime(currentTime);
+        if(progressPercent === 100){
+          onClickStopAndStart()
+        }
     }
     
-  },[setProgressPercent]);
+  },[onClickStopAndStart, setDuration, setProgressPercent]);
 
-  // useEffect(()=>{
-  //   const audioPlayer:any = document.getElementById('audioPlayer');
-  //   console.log(audioPlayer)
-  //   audioPlayer.addEventListener('timeupdate', updateProgress);
-  // },[updateProgress])
   const onSearch = useCallback((value: string) => {
     let newMusicList:any=[]
     for(let index = 0; index < music?.length; index++){
@@ -66,7 +83,7 @@ export default () => {
     setMusicList([...newMusicList])
     let hasIndex=false;
     for(let index = 0; index < newMusicList?.length; index++){
-      console.log(newMusicList[index],currentSong,newMusicList[index].split('-')[0],newMusicList[index].split('-')[0] === currentSong)
+      
       if(newMusicList[index] === currentSong){
         hasIndex=true
         setMusicIndex(index)
@@ -79,6 +96,11 @@ export default () => {
   },[currentSong, setMusicIndex, setMusicList]);
 
   const App: React.FC = () => ( <Progress percent={70} status="exception" />);
+//进度
+  const onChange = (value: number ) => {
+    const audioPlayer:any = document.getElementById('audioPlayer');
+    audioPlayer.currentTime = (value / 100) * duration;
+  };
 /*选歌*/
   const onClickDo = useCallback((index:any) => {
     setIsPlaying(true)
@@ -111,21 +133,7 @@ export default () => {
     }
     return returnValue        
   },[musicIndex, musicList, onClickDo]);
-//播放暂停键
-  const onClickStopAndStart = useCallback(() =>{
-    const audioPlayer:any = document.getElementById('audioPlayer');
-    if(currentSong==="暂无播放-暂无歌手.MP3"){
-      setIsPlaying(false)
-    }else{
-      if(isPlaying===true){
-        audioPlayer.pause();
-        setIsPlaying(false)
-      }else{
-        audioPlayer.play();
-        setIsPlaying(true)
-      }
-    }
-  },[isPlaying, setIsPlaying, currentSong]);
+
 /*下一首 */
   const onClickNext = useCallback(() => {
     if(musicIndex + 1 < (music.length)){
@@ -152,6 +160,7 @@ export default () => {
  
     
   },[isPlaying, onClickStopAndStart]);
+  const volumeBar = document.getElementById('volume-bar');
 /*歌曲名显示*/
   const renderSongName=useCallback(()=>{
     if(musicList?.length>0){
@@ -170,21 +179,28 @@ export default () => {
     }
 
   },[musicList, musicIndex, currentSong])
-//播放顺序
+
+  const onClickOne=useCallback(()=>{
+    setNowTime('one')
+  },[setNowTime])
+  const onClickNowTime=useCallback(()=>{
+    setNowTime('allNext')
+  },[setNowTime])
+  const onClickRandom=useCallback(()=>{
+    setNowTime('random')
+  },[setNowTime])
+  //播放顺序
   const renderNowTime=useCallback(()=>{
-    if(nowTime==='rendem'){
-      setNowTime('one')
-      return <div className={styles.picture}><img onClick={()=>onClickNowTime()} className={styles.nowTime} src="./image/one.png" alt="" /></div>
+    if(nowTime==='random'){
+      return <div className={styles.picture}><img onClick={()=>onClickOne()} className={styles.nowTime} src="./image/one.png" alt="" /></div>
+    }else
+    if(nowTime==='one'){
+      return <div className={styles.picture}><img onClick={()=>onClickNowTime()} className={styles.nowTime} src="./image/allNext.png" alt="" /></div>
     }else{
-      if(nowTime==='one'){
-        setNowTime('allNext')
-        return <div className={styles.picture}><img onClick={()=>onClickNowTime()} className={styles.nowTime} src="./image/allNext.png" alt="" /></div>
-      }else{
-        setNowTime('rendom')
-        return <div className={styles.picture}><img onClick={()=>onClickNowTime()} className={styles.nowTime} src="./image/rendom.png" alt="" /></div>
-      }
+      return <div className={styles.picture}><img onClick={()=>onClickRandom()} className={styles.nowTime} src="./image/random.png" alt="" /></div>
     }
-  },[])
+    
+  },[nowTime, onClickNowTime, onClickOne, onClickRandom])
   return (
     <div className={styles.global}>
         <div className={styles.leftOut}>
@@ -220,13 +236,9 @@ export default () => {
           </div>
           <div className={styles.dock}>
             <div className={styles.jinDuTiao}>
-              <div className={styles.progressContainer}>
-                <div className={styles.progressBar} id="progress-bar">
-                    <div className={styles.progress} id="progress" style={{width:progressPercent+'%'}}>
-                        <div className={styles.progressHandle} id="progress-handle"></div>
-                    </div>
-                </div>
-            </div>
+     
+                <Slider value={progressPercent} tooltip={{ formatter: null }} onChange={onChange} step={0.00001} />
+        
             </div>
             <div className={styles.forOverflow}>
               <div className={styles.dockBar}>
