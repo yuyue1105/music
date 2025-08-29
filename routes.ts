@@ -1,8 +1,14 @@
 //采用一级平铺定义路由，禁止嵌套定义路由
 export const routes = [
+  // {
+  //   path: '/',
+  //   redirect: '/template',
+  //   layout: false
+  // },
   {
+    name: '模板',
     path: '/',
-    redirect: '/user/login',
+    component: './Template',
     layout: false
   },
   {

@@ -54,21 +54,21 @@ export function goHome() {
       window.location.href = `${window.location.origin}/store-saas/#/home`;
     }
   } else {// 本地环境
-    window.location.href = `${window.location.origin}/#/user/login`;
+    window.location.href = `${window.location.origin}/#/template`;
   }
 }
 
 export function goLogin() {
   if ( window.location.href?.indexOf('localhost') === -1 && window.location.href?.indexOf('192.168') === -1 ) {// 线上环境
     if ( window.location.href?.indexOf('210.45.195.91') !== -1 ) {//安师大定制的url
-      window.location.href = `${window.location.origin}/jx-digital-editor-web/#/user/login`;
+      window.location.href = `${window.location.origin}/jx-digital-editor-web/#/template`;
     } else if (window.location.pathname?.includes('/store-')) {//企业定制的url
       let companyKey = '/' + window.location.pathname.split('/')[1];
-      window.location.href = `${window.location.origin}${companyKey}/store-saas/#/user/login`;
+      window.location.href = `${window.location.origin}${companyKey}/store-saas/#/template`;
     } else {//saas的url
-      window.location.href = `${window.location.origin}/store-saas/#/user/login`;
+      window.location.href = `${window.location.origin}/store-saas/#/template`;
     }
   } else {// 本地环境
-    window.location.href = `${window.location.origin}/#/user/login`;
+    window.location.href = `${window.location.origin}/#/template`;
   }
 }

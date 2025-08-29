@@ -17,6 +17,7 @@ export default () => {
   let [audioPlayer,setAudioPlayer] = useState<any>(0);
   let [volume,setVolume] = useState<any>(0);
   let [duration,setDuration] = useState<any>(0);
+  let [orders,setOrders] = useState<any>('ABC');
   return {
     musicIndex,
     setMusicIndex,
@@ -39,6 +40,8 @@ export default () => {
     volume,
     setVolume,
     duration,
-    setDuration
+    setDuration,
+    orders,
+    setOrders
   }
 };
